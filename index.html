@@ -147,13 +147,8 @@ Welcome Slider
 			</div>
 			<div class="col-lg-6">
 				<div class="block">
-					<h2>We love chandra sekar</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At quo dolor est incidunt suscipit minima, alias numquam voluptatum rerum porro. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore at laboriosam unde repellat id expedita quae quisquam libero officia consequatur. </p>
-					<ul class="list-inline wow fadeInUp" data-wow-duration=".5s" data-wow-delay=".7s">
-						<li class="list-inline-item">
-							<a href="https://themefisher.com/" target="_blank" class="btn btn-main">Download More</a>		
-						</li>
-					</ul>
+					<h4 id="firstTitle">Upcoming VR Events</h2>
+					<p id="firstContent">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At quo dolor est incidunt suscipit minima, alias numquam voluptatum rerum porro. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore at laboriosam unde repellat id expedita quae quisquam libero officia consequatur. </p>
 				</div>
 			</div>
 		</div>
@@ -1143,12 +1138,17 @@ The following part can be removed on Server for On Demand Loading) -->
 					if (!result.hasOwnProperty(item.id.videoId)) {
 						result[i] = {
 								videoId: item.id.videoId,
-								title: item.snippet.title
+								title: item.snippet.title,
+								description: item.snippet.description
 						};
 					}
 				});
 
 				var firstVideoId = result[0].videoId;
+				var firstTitle = result[0].title;
+				var firstContent = result[0].description;
+				$('#firstTitle').text(firstTitle);
+				$('#firstContent').text(firstContent);
 				$('.video-player')
 					.children('img')
 					.attr('src', 'https://i.ytimg.com/vi/'+ firstVideoId +'/hqdefault.jpg');
