@@ -139,9 +139,9 @@ Welcome Slider
 		<div class="row">
 			<div class="col-lg-6 mb-4 mb-lg-0">
 				<div class="video-player">
-					<img class="img-fluid rounded w-100" src="images/slider/video-player-thumb.jpg" alt="">
+					<img class="img-fluid rounded w-100" src="" alt="">
 					<a class="play-icon" href="javascript:void(0)">
-						<i class="tf-ion-play" data-video="https://www.youtube.com/embed/g3-VxLQO7do?autoplay=1"></i>
+						<i class="tf-ion-play" data-video=""></i>
 					</a>
 				</div>
 			</div>
@@ -1134,7 +1134,30 @@ The following part can be removed on Server for On Demand Loading) -->
                 }
             }
         });
-    });
+				$.get( "https://www.googleapis.com/youtube/v3/search?key=AIzaSyC7QYX38nYb-f9CYigJyJuye0rSzDNRvNE&channelId=UCwc_Do8vgWR2wHDw--ZLSOQ&part=snippet,id&order=date&maxResults=20", function( data ) {
+				//$( ".result" ).html( data );
+				
+				let result = {};
+
+				data.items.forEach((item, i) => {
+					if (!result.hasOwnProperty(item.id.videoId)) {
+						result[i] = {
+								videoId: item.id.videoId,
+								title: item.snippet.title
+						};
+					}
+				});
+
+				var firstVideoId = result[0].videoId;
+				$('.video-player')
+					.children('img')
+					.attr('src', 'https://i.ytimg.com/vi/'+ firstVideoId +'/hqdefault.jpg');
+				$('.video-player')
+					.children('a')
+					.children('i')
+					.attr('data-video', 'https://www.youtube.com/embed/'+ firstVideoId +'?autoplay=1');	
+				});
+		});
 </script>
 </body>
 </html>
